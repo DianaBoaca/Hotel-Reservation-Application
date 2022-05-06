@@ -3,6 +3,8 @@ package hotel_repo.Services;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import hotel_repo.Exception.UsernameAlreadyExistsException;
+import hotel_repo.Exception.UsernameNotFoundException;
+import hotel_repo.Exception.IncorrectPasswordException;
 import hotel_repo.Model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -36,6 +38,21 @@ public class UserService {
         }
     }
 
+    public static User loginUser(String username, String password) throws UsernameNotFoundException, IncorrectPasswordException {
+        for (User user : userRepository.find()) {
+            if (Objects.equals(username, user.getUsername()))
+            {
+                if (Objects.equals(encodePassword(username, password), user.getPassword()))
+                    return user;
+                else
+                    throw new IncorrectPasswordException(username);
+            }
+            throw new UsernameNotFoundException(username);
+        }
+
+        return null;
+    }
+
     private static String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();
         md.update(salt.getBytes(StandardCharsets.UTF_8));
@@ -56,6 +73,5 @@ public class UserService {
         }
         return md;
     }
-
 
 }
