@@ -9,6 +9,9 @@ import javafx.scene.text.Text;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import java.util.Objects;
 import java.io.IOException;
 import hotel_repo.Exception.UsernameNotFoundException;
 import hotel_repo.Exception.IncorrectPasswordException;
@@ -25,10 +28,19 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    public void handleLoginAction2() {
+    public void handleLoginAction2(ActionEvent event) {
         try {
-            UserService.loginUser(usernameField.getText(), passwordField.getText());
-            loginMessage.setText("Logged in successfully!");
+            User user = UserService.loginUser(usernameField.getText(), passwordField.getText());
+            if(Objects.equals(user.getRole(), "Hotel Manager")) {
+                Parent root;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("dashboard.fxml"));
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (UsernameNotFoundException e) {
             loginMessage.setText(e.getMessage());
         } catch (IncorrectPasswordException e) {
