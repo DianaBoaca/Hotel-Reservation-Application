@@ -28,7 +28,7 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    public void handleLoginAction2(ActionEvent event) {
+      public void handleLoginAction2(ActionEvent event) {
         try {
             User user = UserService.loginUser(usernameField.getText(), passwordField.getText());
             if(Objects.equals(user.getRole(), "Hotel Manager")) {
@@ -45,6 +45,18 @@ public class LoginController {
             loginMessage.setText(e.getMessage());
         } catch (IncorrectPasswordException e) {
             loginMessage.setText(e.getMessage());
+        }
+    }
+
+
+    public void handleLoginAction3(ActionEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
