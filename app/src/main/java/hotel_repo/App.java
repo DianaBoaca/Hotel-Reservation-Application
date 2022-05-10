@@ -18,7 +18,7 @@ public class App extends Application {
         initDirectory();
         UserService.initDatabase();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-        primaryStage.setTitle("Hotel Registration");
+        primaryStage.setTitle("Hotel Reservation Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

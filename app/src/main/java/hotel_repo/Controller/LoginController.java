@@ -28,20 +28,10 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    public void handleLoginAction2(ActionEvent event) {
+     public void handleLoginAction2() {
         try {
-            User user = UserService.loginUser(usernameField.getText(), passwordField.getText());
-            Parent root;
-
-            if(Objects.equals(user.getRole(), "Hotel Manager")) {
-                try {
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("dashboard.fxml"));
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            UserService.loginUser(usernameField.getText(), passwordField.getText());
+            loginMessage.setText("Logged in successfully!");
         } catch (UsernameNotFoundException e) {
             loginMessage.setText(e.getMessage());
         } catch (IncorrectPasswordException e) {

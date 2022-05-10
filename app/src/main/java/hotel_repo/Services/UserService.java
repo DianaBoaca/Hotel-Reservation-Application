@@ -40,16 +40,14 @@ public class UserService {
 
     public static User loginUser(String username, String password) throws UsernameNotFoundException, IncorrectPasswordException {
         for (User user : userRepository.find()) {
-            if (Objects.equals(username, user.getUsername()))
-            {
-                if (Objects.equals(encodePassword(username, password), user.getPassword()))
+            if (Objects.equals(username, user.getUsername())) {
+                if (encodePassword(username, password).equals(user.getPassword()))
                     return user;
                 else
                     throw new IncorrectPasswordException(username);
             }
             throw new UsernameNotFoundException(username);
         }
-
         return null;
     }
 
