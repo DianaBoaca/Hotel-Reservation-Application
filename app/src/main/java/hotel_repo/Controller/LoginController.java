@@ -41,6 +41,16 @@ public class LoginController {
                     e.printStackTrace();
                 }
             }
+            else {
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("Dashboard_user.fxml"));
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         } catch (UsernameNotFoundException e) {
             loginMessage.setText(e.getMessage());
         } catch (IncorrectPasswordException e) {
