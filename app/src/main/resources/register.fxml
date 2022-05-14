@@ -34,7 +34,8 @@
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="13" />
 
     <Button onAction="#handleLoginAction1" prefHeight="26.0" prefWidth="98.0" text="Log in" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-     <Button onAction="#handleRegisterAction" prefHeight="26.0" prefWidth="107.0" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="13">
+
+    <Button onAction="#handleRegisterAction" prefHeight="26.0" prefWidth="107.0" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="13">
       <GridPane.margin>
          <Insets left="20.0" />
       </GridPane.margin>
