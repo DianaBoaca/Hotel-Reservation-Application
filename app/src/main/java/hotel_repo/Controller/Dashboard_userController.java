@@ -13,13 +13,12 @@ import java.io.IOException;
 public class Dashboard_userController {
 
     @FXML
-    public void handleViewHotelsAction() {
+    public void handleViewHotelsAction(ActionEvent event) {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Hotel_List_Page.fxml"));
-            Stage stage = new Stage();
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
