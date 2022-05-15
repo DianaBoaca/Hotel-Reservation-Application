@@ -52,5 +52,3 @@ public class Hotels_ClientController {
     }
 
     }
-
-
