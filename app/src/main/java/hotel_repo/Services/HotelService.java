@@ -1,8 +1,12 @@
 package hotel_repo.Services;
 
+import hotel_repo.Services.FileSystemService;
 import hotel_repo.Model.Hotel;
 import java.util.ArrayList;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.*;
 
 public class HotelService {
 
@@ -16,7 +20,7 @@ public class HotelService {
         add(hotelBrasov);
     }};
 
-    public static String[] test(FileReader reader, BufferedReader br) throws Exception {
+    public static String[] text(FileReader reader, BufferedReader br) throws Exception {
 
         int readedValue;
         int ok = 0;
@@ -54,19 +58,31 @@ public class HotelService {
 
     public static void setHotels() throws Exception {
 
-        FileReader reader = new FileReader("C:\\Users\\Diana\\.registration-example\\storage.txt");
+        Path pathFile = Paths.get(System.getProperty("user.home"), ".registration-example");
+        File yourFile = new File(pathFile + "\\storage.txt");
+        boolean exist = yourFile.exists();
+
+        if (exist == false)
+        {
+            yourFile.createNewFile();
+            PrintWriter writer = new PrintWriter(pathFile + "\\storage.txt", "UTF-8");
+            writer.print("######");
+            writer.close();
+        }
+
+        FileReader reader = new FileReader(pathFile + "\\storage.txt");
         BufferedReader br = new BufferedReader(reader);
         String x[] = { "", ""};
 
-        x = test(reader, br);
+        x = text(reader, br);
         hotelTimisoara.setAddress(x[0]);
         hotelTimisoara.setDescription(x[1]);
 
-        x = test(reader, br);
+        x = text(reader, br);
         hotelCluj.setAddress(x[0]);
         hotelCluj.setDescription(x[1]);
 
-        x = test(reader, br);
+        x = text(reader, br);
         hotelBrasov.setAddress(x[0]);
         hotelBrasov.setDescription(x[1]);
 
@@ -74,7 +90,8 @@ public class HotelService {
 
     public static void storage(String title, String address, String description) throws Exception {
 
-        PrintWriter writer = new PrintWriter("C:\\Users\\Diana\\.registration-example\\storage.txt", "UTF-8");
+        Path pathFile = Paths.get(System.getProperty("user.home"), ".registration-example");
+        PrintWriter writer = new PrintWriter(pathFile + "\\storage.txt", "UTF-8");
 
         for (Hotel h : hotels) {
 
