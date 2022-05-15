@@ -11,8 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.io.IOException;
 import hotel_repo.Exception.UsernameAlreadyExistsException;
 import hotel_repo.Services.UserService;

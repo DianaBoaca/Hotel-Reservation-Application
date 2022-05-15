@@ -28,12 +28,11 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    public void handleLoginAction2(ActionEvent event) {
+      public void handleLoginAction2(ActionEvent event) {
         try {
             User user = UserService.loginUser(usernameField.getText(), passwordField.getText());
             Parent root;
             
-
             if(Objects.equals(user.getRole(), "Hotel Manager")) {
                 try {
                     root = FXMLLoader.load(getClass().getClassLoader().getResource("dashboard.fxml"));
@@ -59,6 +58,7 @@ public class LoginController {
             loginMessage.setText(e.getMessage());
         }
     }
+
 
     public void handleLoginAction3(ActionEvent event) {
         Parent root;

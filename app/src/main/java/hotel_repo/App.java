@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import hotel_repo.Services.FileSystemService;
 import hotel_repo.Services.UserService;
+import hotel_repo.Services.HotelService;
+import hotel_repo.Model.Hotel;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,9 +20,10 @@ public class App extends Application {
         initDirectory();
         UserService.initDatabase();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-        primaryStage.setTitle("Hotel Registration");
+        primaryStage.setTitle("Hotel Reservation Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        HotelService.setHotels();
     }
 
     private void initDirectory() {
@@ -29,7 +32,6 @@ public class App extends Application {
             applicationHomePath.toFile().mkdirs();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) { launch(args); }
+
 }
