@@ -14,12 +14,16 @@ import hotel_repo.Model.User;
 
 public class Hotel_List_PageController {
 
+    public static String title;
+
     @FXML
     public void handleTimisoaraAction() {
         Parent root;
         try {
+            title = "Hotel Timisoara";
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Hotel_Timisoara_Client.fxml"));
             Stage stage = new Stage();
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -31,8 +35,10 @@ public class Hotel_List_PageController {
     public void handleClujAction() {
         Parent root;
         try {
+            title = "Hotel Cluj";
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Hotel_Cluj_Client.fxml"));
             Stage stage = new Stage();
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -41,11 +47,13 @@ public class Hotel_List_PageController {
     }
 
     @FXML
-    public void handleBrasovAction() {
+    public void handleBrasovAction(ActionEvent event) {
         Parent root;
         try {
+            title = "Hotel Brasov";
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Hotel_Brasov_Client.fxml"));
             Stage stage = new Stage();
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
