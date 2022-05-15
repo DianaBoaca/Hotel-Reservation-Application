@@ -32,6 +32,7 @@ public class LoginController {
         try {
             User user = UserService.loginUser(usernameField.getText(), passwordField.getText());
             Parent root;
+            
 
             if(Objects.equals(user.getRole(), "Hotel Manager")) {
                 try {
