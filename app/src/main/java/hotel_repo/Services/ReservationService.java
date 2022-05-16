@@ -44,6 +44,11 @@ public class ReservationService {
 
     }
 
+    public static void addReservation(Reservation res) throws UnavailableDateException {
+        checkUnavailableDateException(res.getCheckin_date(), res.getCheckout_date());
+        reservationRepository.insert(res);
+    }
+
     //to be implemented
     private static void checkUnavailableDateException(String Checkin_date, String Checkout_date) throws UnavailableDateException{
         /*for (Reservation reservation : reservationRepository.find()) {

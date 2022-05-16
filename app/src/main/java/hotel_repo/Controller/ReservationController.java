@@ -1,5 +1,6 @@
 package hotel_repo.Controller;
 
+import hotel_repo.Model.Reservation;
 import hotel_repo.Model.User;
 import hotel_repo.Services.ReservationService;
 import javafx.fxml.FXML;
@@ -30,11 +31,14 @@ import java.util.ResourceBundle;
 import hotel_repo.Model.Hotel;
 import hotel_repo.Services.HotelService;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 
 
 public class ReservationController implements Initializable {
 
     String Hotel_ID;
+    static int Price;
+    static Reservation res;
 
     @FXML
     private TextField commentField;
@@ -67,10 +71,17 @@ public class ReservationController implements Initializable {
 
     }
 
-    public int countDays(){
+    /*public int countDays(){
         Duration duration = Duration.between(Checkin_date.getValue(), Checkout_date.getValue());
-        int zile = (int) duration.getSeconds()/86400;
-        return zile;
+        return (int) duration.toDays();
+    }*/
+
+    public int getPrice(String type, int roomnb, int days){
+       if(type.equals("double"))
+           return roomnb*400*days;
+       if(type.equals("triple"))
+           return roomnb*500*days;
+       return  roomnb*600*days;
     }
 
     @Override
@@ -102,8 +113,9 @@ public class ReservationController implements Initializable {
         Parent root;
         try {
             findHotel();
-            ReservationService.addReservation(LoginController.Username, Hotel_ID,Checkin_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")),Checkout_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")), Room_type.getValue(), Room_number.getValue(), commentField.getText());
-            System.out.println(Checkin_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")));
+            Price=getPrice(Room_type.getValue(), Room_number.getValue(), (int )DAYS.between(Checkin_date.getValue(), Checkout_date.getValue()));
+            res= new Reservation(LoginController.Username, Hotel_ID,Checkin_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")),Checkout_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")), Room_type.getValue(), Room_number.getValue(), commentField.getText());
+
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Pay.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
