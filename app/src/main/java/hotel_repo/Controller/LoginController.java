@@ -27,12 +27,17 @@ public class LoginController {
     @FXML
     private TextField usernameField;
 
+    protected static String Username;
+
     @FXML
       public void handleLoginAction2(ActionEvent event) {
         try {
             User user = UserService.loginUser(usernameField.getText(), passwordField.getText());
+            Username=usernameField.getText();
+            Parent root;
+
             if(Objects.equals(user.getRole(), "Hotel Manager")) {
-                Parent root;
+
                 try {
                     root = FXMLLoader.load(getClass().getClassLoader().getResource("dashboard.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

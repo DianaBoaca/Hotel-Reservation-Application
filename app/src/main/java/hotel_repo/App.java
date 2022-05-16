@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import hotel_repo.Services.FileSystemService;
 import hotel_repo.Services.UserService;
 import hotel_repo.Services.HotelService;
+import hotel_repo.Services.ReservationService;
 import hotel_repo.Model.Hotel;
 
 import java.nio.file.Files;
@@ -24,6 +25,7 @@ public class App extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         HotelService.setHotels();
+        ReservationService.initDatabase();
     }
 
     private void initDirectory() {
