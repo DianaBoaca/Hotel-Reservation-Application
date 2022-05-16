@@ -30,6 +30,14 @@ public class Reservation {
     public Reservation() {
     }
 
+    public void setHotel_ID(String hotel_ID) {
+        Hotel_ID = hotel_ID;
+    }
+
+    public String getHotel_ID() {
+        return Hotel_ID;
+    }
+
     public String getUser() {
         return User;
     }
