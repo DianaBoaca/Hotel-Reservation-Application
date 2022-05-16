@@ -17,7 +17,7 @@
         </GridPane.margin>
     </Button>
 
-    <Button prefHeight="26.0" prefWidth="170.0" text="History of reservations" GridPane.columnIndex="5" GridPane.rowIndex="7">
+    <Button onAction="#handleHistoryReservationAction" prefHeight="26.0" prefWidth="170.0" text="History of reservations" GridPane.columnIndex="5" GridPane.rowIndex="7">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="60.0" />
         </GridPane.margin>
@@ -28,5 +28,28 @@
             <Insets bottom="10.0" left="10.0" right="60.0" />
         </GridPane.margin>
     </Button>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
     
 </GridPane>

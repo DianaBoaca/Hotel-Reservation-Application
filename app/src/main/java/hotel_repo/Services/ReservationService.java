@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import static hotel_repo.Services.FileSystemService.getPathToFile;
+import static org.dizitart.no2.objects.filters.ObjectFilters.eq;
 
 public class ReservationService {
 
@@ -55,6 +56,14 @@ public class ReservationService {
             if (Objects.equals(Checkin_date, reservation.getCheckin_date()) && Objects.equals(Checkout_date, reservation.getCheckout_date()))
                 throw new UnavailableDateException();
         }*/
+    }
+
+    public static String findReservation(String user){
+        String r="";
+        Reservation res = reservationRepository.find(eq("User", user)).firstOrDefault();
+        //to be implemented
+
+        return r;
     }
 
 
