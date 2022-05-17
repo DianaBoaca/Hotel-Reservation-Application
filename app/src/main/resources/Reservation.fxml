@@ -84,6 +84,11 @@
                   <Insets bottom="50.0" left="95.0" />
                </GridPane.margin>
             </Text>
+            <Text fx:id="datesMessage" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="262.1366271972656" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="25.0" top="100.0" />
+               </GridPane.margin>
+            </Text>
          </children>
       </GridPane>
    </children>
