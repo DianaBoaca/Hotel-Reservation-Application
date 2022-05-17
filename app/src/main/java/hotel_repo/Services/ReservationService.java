@@ -23,6 +23,7 @@ import java.util.Objects;
 import static hotel_repo.Services.FileSystemService.getPathToFile;
 import static hotel_repo.Services.HotelService.getHotelbyID;
 import static hotel_repo.Services.HotelService.getRoom_NumberbyID;
+import static org.dizitart.no2.objects.filters.ObjectFilters.eq;
 
 public class ReservationService {
 
@@ -55,6 +56,7 @@ public class ReservationService {
 
     }
 
+
     public static String dtoString(LocalDate d){
         String pattern = "MMM-dd-yyyy";
         String formattedDate = d.format(DateTimeFormatter.ofPattern(pattern));
@@ -68,6 +70,7 @@ public class ReservationService {
         Integer x = getRoom_NumberbyID(id);
         LocalDate in = toDate(Checkin_date);
         LocalDate out = toDate(Checkout_date);
+
 
 
         if(out.isBefore(in)) throw new IncorectDateException();

@@ -25,6 +25,18 @@ public class Dashboard_userController {
     }
 
     @FXML
+    public void handleHistoryReservationAction(ActionEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("My_Reservation_Page.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void handleLogoutAction(ActionEvent event) {
         Parent root;
         try {
