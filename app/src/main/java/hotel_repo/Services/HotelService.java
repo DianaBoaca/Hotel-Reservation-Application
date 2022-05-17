@@ -10,9 +10,9 @@ import java.nio.*;
 
 public class HotelService {
 
-    private static Hotel hotelTimisoara = new Hotel("01", "Hotel Timisoara");
-    private static Hotel hotelCluj = new Hotel("02", "Hotel Cluj");
-    private static Hotel hotelBrasov = new Hotel("03", "Hotel Brasov");
+    private static Hotel hotelTimisoara = new Hotel("01", "Hotel Timisoara", 15);
+    private static Hotel hotelCluj = new Hotel("02", "Hotel Cluj", 15);
+    private static Hotel hotelBrasov = new Hotel("03", "Hotel Brasov", 15);
     private static ArrayList<Hotel> hotels = new ArrayList<Hotel>()
     {{
         add(hotelTimisoara);
@@ -109,6 +109,30 @@ public class HotelService {
 
         writer.close();
 
+    }
+
+    public static int getRoom_NumberbyID(String ID){
+        if(ID.equals(hotelTimisoara.getID()))
+            return hotelTimisoara.getRoom_number();
+
+        if(ID.equals(hotelCluj.getID()))
+            return hotelCluj.getRoom_number();
+
+        if(ID.equals(hotelBrasov.getID()))
+            return hotelBrasov.getRoom_number();
+        return 0;
+    }
+
+    public static Hotel getHotelbyID(String ID){
+        if(ID.equals(hotelTimisoara.getID()))
+            return hotelTimisoara;
+
+        if(ID.equals(hotelCluj.getID()))
+            return hotelCluj;
+
+        if(ID.equals(hotelBrasov.getID()))
+            return hotelBrasov;
+        return null;
     }
 
 }

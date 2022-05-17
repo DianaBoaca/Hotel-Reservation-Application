@@ -1,5 +1,9 @@
 package hotel_repo.Controller;
 
+import hotel_repo.Exception.IncorectDateException;
+import hotel_repo.Exception.NotSelectedRoomNumberException;
+import hotel_repo.Exception.NotSelectedRoomTypeException;
+import hotel_repo.Exception.UnavailableDateException;
 import hotel_repo.Model.Reservation;
 import hotel_repo.Model.User;
 import hotel_repo.Services.ReservationService;
@@ -31,6 +35,7 @@ import java.util.ResourceBundle;
 import hotel_repo.Model.Hotel;
 import hotel_repo.Services.HotelService;
 
+import static hotel_repo.Services.ReservationService.checkUnavailableDateException;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 
@@ -54,6 +59,9 @@ public class ReservationController implements Initializable {
 
     @FXML
     private ChoiceBox<String> Room_type;
+
+    @FXML
+    private Text datesMessage;
 
 
    public void getDatein(ActionEvent event) {
@@ -108,12 +116,21 @@ public class ReservationController implements Initializable {
             }
         }
 
+        public void checkSelection(ChoiceBox<String> t, ChoiceBox<Integer> n) throws NotSelectedRoomTypeException, NotSelectedRoomNumberException{
+            if(t.getSelectionModel().isEmpty()) throw new NotSelectedRoomTypeException();
+            if(n.getSelectionModel().isEmpty()) throw  new NotSelectedRoomNumberException();
+        }
+
     @FXML
-    public void handlePayAction(ActionEvent event) throws Exception{
+    public void handlePayAction(ActionEvent event) throws NotSelectedRoomTypeException, NotSelectedRoomNumberException, UnavailableDateException, IncorectDateException, Exception{
         Parent root;
         try {
+
+            checkSelection(Room_type, Room_number );
+
             findHotel();
             Price=getPrice(Room_type.getValue(), Room_number.getValue(), (int )DAYS.between(Checkin_date.getValue(), Checkout_date.getValue()));
+            checkUnavailableDateException(Checkin_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")), Checkout_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")), Hotel_ID);
             res= new Reservation(LoginController.Username, Hotel_ID,Checkin_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")),Checkout_date.getValue().format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")), Room_type.getValue(), Room_number.getValue(), commentField.getText());
 
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Pay.fxml"));
@@ -121,9 +138,18 @@ public class ReservationController implements Initializable {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (UnavailableDateException e){
+            datesMessage.setText(e.getMessage());
+        }catch (IncorectDateException e){
+            datesMessage.setText(e.getMessage());
+        }catch (NotSelectedRoomTypeException e){
+            datesMessage.setText(e.getMessage());
+        }catch (NotSelectedRoomNumberException e){
+            datesMessage.setText(e.getMessage());
         }
     }
-
 }
+
+
 
 
