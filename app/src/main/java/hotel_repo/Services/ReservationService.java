@@ -55,9 +55,8 @@ public class ReservationService {
         return localDate;
 
     }
-
-
-    public static String dtoString(LocalDate d){
+  
+  public static String dtoString(LocalDate d){
         String pattern = "MMM-dd-yyyy";
         String formattedDate = d.format(DateTimeFormatter.ofPattern(pattern));
 
@@ -97,6 +96,17 @@ public class ReservationService {
                 dates_nr.add(y, dates_nr.get(y)+ (Integer) 1);
             }
         }*/
+    }
+  
+ 
+
+    public static String findReservation(String user) {
+        String s="";
+        for (Reservation res : reservationRepository.find(ObjectFilters.eq("User", user))) {
+            s +="Hotel: " + res.getHotel_ID() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date()+" Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number()+ "\n\n";
+        }
+        return s;
+      
     }
 }
 
