@@ -9,6 +9,7 @@ import hotel_repo.Model.Reservation;
 import hotel_repo.Model.User;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.dizitart.no2.objects.filters.ObjectFilters;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -58,12 +59,13 @@ public class ReservationService {
         }*/
     }
 
-    public static String findReservation(String user){
-        String r="";
-        Reservation res = reservationRepository.find(eq("User", user)).firstOrDefault();
-        //to be implemented
 
-        return r;
+    public static String findReservation(String user) {
+        String s="";
+        for (Reservation res : reservationRepository.find(ObjectFilters.eq("User", user))) {
+            s +="Hotel: " + res.getHotel_ID() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date()+" Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number()+ " \n\n\n";
+        }
+        return s;
     }
 
 
