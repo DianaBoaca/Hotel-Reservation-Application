@@ -97,16 +97,36 @@ public class ReservationService {
             }
         }*/
     }
-  
- 
 
     public static String findReservation(String user) {
-        String s="";
+
+        String s = "";
+
         for (Reservation res : reservationRepository.find(ObjectFilters.eq("User", user))) {
             s +="Hotel: " + res.getHotel_ID() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date()+" Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number()+ "\n\n";
         }
+
         return s;
-      
     }
+
+    public static String findAllReservations() {
+
+        String s = "";
+
+        for (Reservation res : reservationRepository.find()) {
+           s += "Hotel ";
+            if(res.getHotel_ID().equals("01"))
+                s += "Timisoara";
+            else if(res.getHotel_ID().equals("02"))
+                s += "Cluj";
+            else
+                s += "Brasov";
+
+            s +=", Username: "+ res.getUser() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date()+" Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number()+ "\n\n";
+        }
+
+        return s;
+    }
+
 }
 
