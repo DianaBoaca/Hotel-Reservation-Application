@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="398.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel_repo.Controller.AllReservationsPageController">
    <children>
-      <TextArea fx:id="text" layoutX="6.0" layoutY="54.0" prefHeight="316.0" prefWidth="754.0" />
+      <TextArea fx:id="text" editable="false" layoutX="6.0" layoutY="54.0" prefHeight="316.0" prefWidth="754.0" />
       <Text layoutX="324.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="History of reservations" />
    </children>
 </AnchorPane>

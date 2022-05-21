@@ -23,6 +23,7 @@ import java.util.Objects;
 import static hotel_repo.Services.FileSystemService.getPathToFile;
 import static hotel_repo.Services.HotelService.getHotelbyID;
 import static hotel_repo.Services.HotelService.getRoom_NumberbyID;
+import static java.time.LocalDate.now;
 import static org.dizitart.no2.objects.filters.ObjectFilters.eq;
 
 public class ReservationService {
@@ -109,6 +110,26 @@ public class ReservationService {
         return s;
     }
 
+    public static String findCurrentReservations() {
+
+        String s = "";
+
+        for (Reservation res : reservationRepository.find(ObjectFilters.eq("Checkin_date", dtoString(now())))) {
+
+            s += "Hotel ";
+            if(res.getHotel_ID().equals("01"))
+                s += "Timisoara";
+            else if(res.getHotel_ID().equals("02"))
+                s += "Cluj";
+            else
+                s += "Brasov";
+
+            s +=", Username: "+ res.getUser() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date() + ", Room type: " + res.getRoom_type() + ", Number of rooms: " + res.getRoom_number() + "\n\n";
+        }
+
+        return s;
+    }
+
     public static String findAllReservations() {
 
         String s = "";
@@ -122,7 +143,7 @@ public class ReservationService {
             else
                 s += "Brasov";
 
-            s +=", Username: "+ res.getUser() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date()+" Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number()+ "\n\n";
+            s +=", Username: "+ res.getUser() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date() + ", Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number() + "\n\n";
         }
 
         return s;
