@@ -2,6 +2,7 @@ package hotel_repo.Services;
 
 import hotel_repo.Controller.EditPageController;
 import hotel_repo.Exception.IncorectDateException;
+import hotel_repo.Exception.IncorectDateException2;
 import hotel_repo.Exception.UnavailableDateException;
 import hotel_repo.Model.Hotel;
 import hotel_repo.Model.Reservation;
@@ -23,6 +24,7 @@ import java.util.Objects;
 import static hotel_repo.Services.FileSystemService.getPathToFile;
 import static hotel_repo.Services.HotelService.getHotelbyID;
 import static hotel_repo.Services.HotelService.getRoom_NumberbyID;
+import static java.time.LocalDate.now;
 import static org.dizitart.no2.objects.filters.ObjectFilters.eq;
 
 public class ReservationService {
@@ -37,13 +39,13 @@ public class ReservationService {
         reservationRepository = database.getRepository(Reservation.class);
     }
 
-    public static void addReservation(String User, String Hotel_ID, String Checkin_date, String Checkout_date, String Room_type, int Room_number, String Comment) throws UnavailableDateException, IncorectDateException {
+    public static void addReservation(String User, String Hotel_ID, String Checkin_date, String Checkout_date, String Room_type, int Room_number, String Comment) throws UnavailableDateException, IncorectDateException, IncorectDateException, IncorectDateException2 {
         checkUnavailableDateException(Checkin_date, Checkout_date, Hotel_ID);
         reservationRepository.insert(new Reservation(User, Hotel_ID, Checkin_date, Checkout_date, Room_type, Room_number, Comment));
 
     }
 
-    public static void addReservation(Reservation res) throws UnavailableDateException, IncorectDateException {
+    public static void addReservation(Reservation res) throws UnavailableDateException, IncorectDateException, IncorectDateException, IncorectDateException2 {
         checkUnavailableDateException(res.getCheckin_date(), res.getCheckout_date(), res.getHotel_ID());
         reservationRepository.insert(res);
     }
@@ -64,7 +66,7 @@ public class ReservationService {
         return formattedDate;
     }
 
-    public static void checkUnavailableDateException(String Checkin_date, String Checkout_date, String id) throws IncorectDateException, UnavailableDateException{
+    public static void checkUnavailableDateException(String Checkin_date, String Checkout_date, String id) throws  IncorectDateException, IncorectDateException2, UnavailableDateException{
 
         int y;
         Integer x = getRoom_NumberbyID(id);
@@ -74,6 +76,7 @@ public class ReservationService {
 
 
         if(out.isBefore(in)) throw new IncorectDateException();
+        if(in.isBefore(now())) throw new IncorectDateException2();
 
 
         ArrayList<String> dates = getHotelbyID(id).getDates();
@@ -97,6 +100,14 @@ public class ReservationService {
                 dates_nr.add(y, dates_nr.get(y)+ (Integer) 1);
             }
         }*/
+    }
+    public static String findReservation(String user) {
+        String s="";
+        for (Reservation res : reservationRepository.find(ObjectFilters.eq("User", user))) {
+            s +="Hotel: " + res.getHotel_ID() + ", Checkin Date: " + res.getCheckin_date() + ", Checkout Date: " + res.getCheckout_date()+" Room type: "+res.getRoom_type() + ", Number of rooms:" + res.getRoom_number()+ "\n\n";
+        }
+        return s;
+
     }
 }
 

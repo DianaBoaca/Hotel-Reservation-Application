@@ -1,6 +1,7 @@
 package hotel_repo.Controller;
 
 import hotel_repo.Exception.IncorectDateException;
+import hotel_repo.Exception.IncorectDateException2;
 import hotel_repo.Exception.UnavailableDateException;
 import hotel_repo.Model.Reservation;
 import hotel_repo.Services.ReservationService;
@@ -48,7 +49,7 @@ public class PayController {
     }
 
     @FXML
-    public void handleValidateAction(ActionEvent event) throws UnavailableDateException, IncorectDateException {
+    public void handleValidateAction(ActionEvent event) throws UnavailableDateException, IncorectDateException2, IncorectDateException {
 
        if(Name.getText().isEmpty())
            payMessage.setText("Please enter cardholder's name!");
@@ -63,7 +64,9 @@ public class PayController {
                    payMessage.setText(e.getMessage());
                }catch(UnavailableDateException e){
                    payMessage.setText(e.getMessage());
-               }
+               }catch(IncorectDateException2 e){
+            payMessage.setText(e.getMessage());
+        }
            }
     }
 

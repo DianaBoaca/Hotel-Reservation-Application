@@ -1,9 +1,6 @@
 package hotel_repo.Controller;
 
-import hotel_repo.Exception.IncorectDateException;
-import hotel_repo.Exception.NotSelectedRoomNumberException;
-import hotel_repo.Exception.NotSelectedRoomTypeException;
-import hotel_repo.Exception.UnavailableDateException;
+import hotel_repo.Exception.*;
 import hotel_repo.Model.Reservation;
 import hotel_repo.Model.User;
 import hotel_repo.Services.ReservationService;
@@ -122,7 +119,7 @@ public class ReservationController implements Initializable {
         }
 
     @FXML
-    public void handlePayAction(ActionEvent event) throws NotSelectedRoomTypeException, NotSelectedRoomNumberException, UnavailableDateException, IncorectDateException, Exception{
+    public void handlePayAction(ActionEvent event) throws NotSelectedRoomTypeException, NotSelectedRoomNumberException, UnavailableDateException, IncorectDateException, IncorectDateException2, Exception{
         Parent root;
         try {
 
@@ -146,7 +143,9 @@ public class ReservationController implements Initializable {
             datesMessage.setText(e.getMessage());
         }catch (NotSelectedRoomNumberException e){
             datesMessage.setText(e.getMessage());
-        }
+        }catch (IncorectDateException2 e){
+        datesMessage.setText(e.getMessage());
+    }
     }
 }
 
